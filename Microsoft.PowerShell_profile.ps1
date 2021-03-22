@@ -14,12 +14,13 @@ While(1) {ps | sort -des $ordenacao| select -f $quantidade | ft -a; sleep $inter
 
 #Função para copiar a estrutura de um commit
 function commit {
-	param(
-		[string]$mensagem,
-		[string]$arquivo
-	)
-	git add $arquivo
-	git commit -m $mensagem
+	# param(
+	# 	[string]$mensagem,
+	# 	[string]$arquivo
+	# )
+	$args = $args.slit(" ")
+	git add $args[0]
+	git commit -m $args[1]
 	git push origin master
 }
 
