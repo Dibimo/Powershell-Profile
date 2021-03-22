@@ -18,7 +18,7 @@ function commit {
 	# 	[string]$mensagem,
 	# 	[string]$arquivo
 	# )
-	$args = $args.slit(" ")
+	$args = $args.split(" ")
 	git add $args[0]
 	git commit -m $args[1]
 	git push origin master
