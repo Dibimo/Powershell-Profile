@@ -1,3 +1,9 @@
+#definição de apelidos personalizados para comandos
+new-alias rename rename-item #renomear arquivo
+new-alias c clear-host #limpar tela
+new-alias touch New-Item #criar arquivo
+new-alias shotdown Stop-Computer #desligar o pc
+
 #deixando só o diretorio atual
 #customizando a função prompt
 function prompt {
@@ -32,11 +38,6 @@ function startFirefox {
 	Start-Process -FilePath 'C:\Program Files\Mozilla Firefox\firefox.exe' $page
 }
 
-#definição de apelidos personalizados para comandos
-new-alias rename rename-item #renomear arquivo
-new-alias c clear-host #limpar tela
-new-alias touch New-Item #criar arquivo
-new-alias shotdown Stop-Computer #desligar o pc
 
 
 
