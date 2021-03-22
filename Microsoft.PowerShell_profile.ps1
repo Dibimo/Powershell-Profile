@@ -20,7 +20,7 @@ function commit {
 	# )
 	$args = $args.split("/")
 	git add $args[0]
-	git commit -m $args[1]
+	git commit -m $($args[1])
 	git push origin master
 }
 
