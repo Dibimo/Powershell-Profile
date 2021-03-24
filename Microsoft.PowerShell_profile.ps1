@@ -1,36 +1,34 @@
-#definição de apelidos personalizados para comandos
+#alias 
 new-alias rename rename-item #renomear arquivo
 new-alias c clear-host #limpar tela
 new-alias touch New-Item #criar arquivo
-new-alias shotdown Stop-Computer #desligar o pc
 
-#deixando só o diretorio atual
-#customizando a função prompt
+#get the path of the last directory accessed
+$theLast = Get-Content 'C:\Users\mi4\Documents\WindowsPowerShell\theLast.txt'
+
+#customizing the prompt
 function prompt {
   $p = Split-Path -leaf -path (Get-Location)
   "$p> "
 }
 
-#Função top do Linux :p
+#function for simulate command top from Linux
+#Yeah...I know, but I think this pretty cool
 function top{param([int]$intervalo, [int]$quantidade, [string]$ordenacao)
 		
 	
 While(1) {ps | sort -des $ordenacao| select -f $quantidade | ft -a; sleep $intervalo; cls} 
 }
 
-#Função para copiar a estrutura de um commit
+#function for streamline the process for add, commit and push on git
 function commit {
-	# param(
-	# 	[string]$mensagem,
-	# 	[string]$arquivo
-	# )
 	$args = $args.split("/")
 	git add $args[0]
 	git commit -m $($args[1])
 	git push origin master
 }
 
-#abrir com o firefox
+#open a file or web page with Firefox. It's usefull if you ara a web programer :)
 function startFirefox {
 	param (
 		$page
@@ -38,17 +36,22 @@ function startFirefox {
 	Start-Process -FilePath 'C:\Program Files\Mozilla Firefox\firefox.exe' $page
 }
 
-
-
-
-#mensagem de bem vindo
+#welcome mensage
 write-host "Welcome aboard Captain, all system online!"
 
-#adicionando biblioteca que contem o file dialog
-#Add-Type -AssemblyName System.Windows.Forms
-
-#abrir histórico do console
+#open console commands history
 function openHistory {
 	code (Get-PSReadLineOption).HistorySavePath
 }
 
+#logs the event when exiting powershell 
+Register-EngineEvent PowerShell.Exiting -Action {
+	guardarUltimoDiretorio 
+} > $null
+
+#this funcition save the last directory accessed in notepad file
+function guardarUltimoDiretorio {
+	$arquivo = 'C:\Users\mi4\Documents\WindowsPowerShell\theLast.txt'
+	Set-Content $arquivo ''
+	Set-Content $arquivo $pwd.Path
+}
