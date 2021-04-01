@@ -17,7 +17,7 @@ function prompt {
 function top{param([int]$intervalo, [int]$quantidade, [string]$ordenacao)
 		
 	
-While(1) {ps | sort -des $ordenacao| select -f $quantidade | ft -a; sleep $intervalo; cls} 
+While(1) {Get-Process | Sort-Object -des $ordenacao| Select-Object -f $quantidade | Format-Table -a; Start-Sleep $intervalo; Clear-Host} 
 }
 
 #function for streamline the process for add, commit and push on git
@@ -55,3 +55,24 @@ function guardarUltimoDiretorio {
 	Set-Content $arquivo ''
 	Set-Content $arquivo $pwd.Path
 }
+
+function addPoint {
+	$args = $args.split("/")
+	$path = 'C:\Users\mi4\Documents\WindowsPowerShell\pontos.txt'
+	$newPath ='$global:'+"$($args)"+" = '$PWD';"
+	Add-Content -Path $path -value $newPath
+	loadPoints
+
+}
+
+function loadPoints {
+	$path = 'C:\Users\mi4\Documents\WindowsPowerShell\pontos.txt'
+	$points = Get-Content $path
+	$points = [string]$points
+
+	$sb = [scriptblock]::Create($points)
+    Invoke-Command -scriptblock $sb
+
+}
+
+loadPoints
