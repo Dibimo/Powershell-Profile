@@ -25,7 +25,10 @@ function commit {
 	$args = $args.split("/")
 	git add $args[0]
 	git commit -m $($args[1])
-	git pull --rebase
+}
+
+function pullPush {
+	git pull --rebase origin master
 	git push origin master
 }
 
