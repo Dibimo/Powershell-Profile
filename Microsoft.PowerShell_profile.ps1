@@ -4,7 +4,7 @@ new-alias c clear-host #limpar tela
 new-alias touch New-Item #criar arquivo
 
 #get the path of the last directory accessed
-$theLast = Get-Content 'C:\Users\mi4\Documents\WindowsPowerShell\theLast.txt'
+$theLast = Get-Content 'C:\Users\55149\Documents\WindowsPowerShell\theLast.txt'
 
 #customizing the prompt
 function prompt {
@@ -25,6 +25,7 @@ function commit {
 	$args = $args.split("/")
 	git add $args[0]
 	git commit -m $($args[1])
+	git pull --rebase
 	git push origin master
 }
 
@@ -51,14 +52,14 @@ Register-EngineEvent PowerShell.Exiting -Action {
 
 #this funcition save the last directory accessed in notepad file
 function guardarUltimoDiretorio {
-	$arquivo = 'C:\Users\mi4\Documents\WindowsPowerShell\theLast.txt'
+	$arquivo = 'C:\Users\55149\Documents\WindowsPowerShell\theLast.txt'
 	Set-Content $arquivo ''
 	Set-Content $arquivo $pwd.Path
 }
 
 function addPoint {
 	$args = $args.split("/")
-	$path = 'C:\Users\mi4\Documents\WindowsPowerShell\pontos.txt'
+	$path = 'C:\Users\55149\Documents\WindowsPowerShell\pontos.txt'
 	$newPath ='$global:'+"$($args)"+" = '$PWD';"
 	Add-Content -Path $path -value $newPath
 	loadPoints
@@ -66,7 +67,7 @@ function addPoint {
 }
 
 function loadPoints {
-	$path = 'C:\Users\mi4\Documents\WindowsPowerShell\pontos.txt'
+	$path = 'C:\Users\55149\Documents\WindowsPowerShell\pontos.txt'
 	$points = Get-Content $path
 	$points = [string]$points
 
