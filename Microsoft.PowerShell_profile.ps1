@@ -4,7 +4,7 @@ new-alias c clear-host #limpar tela
 new-alias touch New-Item #criar arquivo
 
 #get the path of the last directory accessed
-$theLast = Get-Content '$env:USERPROFILE\Documents\WindowsPowerShell\theLast.txt'
+$theLast = Get-Content "$env:USERPROFILE\Documents\WindowsPowerShell\theLast.txt"
 
 #customizing the prompt
 function prompt {
@@ -52,14 +52,14 @@ Register-EngineEvent PowerShell.Exiting -Action {
 
 #this funcition save the last directory accessed in notepad file
 function guardarUltimoDiretorio {
-	$arquivo = '$env:USERPROFILE\Documents\WindowsPowerShell\theLast.txt'
+	$arquivo = "$env:USERPROFILE\Documents\WindowsPowerShell\theLast.txt"
 	Set-Content $arquivo ''
 	Set-Content $arquivo $pwd.Path
 }
 
 function addPoint {
 	$args = $args.split("/")
-	$path = '$env:USERPROFILE\Documents\WindowsPowerShell\pontos.txt'
+	$path = "$env:USERPROFILE\Documents\WindowsPowerShell\pontos.txt"
 	$newPath ='$global:'+"$($args)"+" = '$PWD';"
 	Add-Content -Path $path -value $newPath
 	loadPoints
@@ -67,7 +67,7 @@ function addPoint {
 }
 
 function loadPoints {
-	$path = '$env:USERPROFILE\Documents\WindowsPowerShell\pontos.txt'
+	$path = "$env:USERPROFILE\Documents\WindowsPowerShell\pontos.txt"
 	$points = Get-Content $path
 	$points = [string]$points
 
